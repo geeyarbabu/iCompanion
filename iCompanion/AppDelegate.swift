@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         // ...
-        if let error = error {
+        if (error) != nil {
             // ...
             return
         }
@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
             // ...
-            if let error = error {
+            if error != nil {
                 // ...
                 return
             }
