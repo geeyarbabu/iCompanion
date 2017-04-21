@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64CE7FDC84E81B98EC77ABCA /* Pods_iCompanion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8C1F6995CD41343103F136 /* Pods_iCompanion.framework */; };
+		B82A45DC1EA999DE00673DA1 /* gmailsignin.m in Sources */ = {isa = PBXBuildFile; fileRef = B82A45DB1EA999DE00673DA1 /* gmailsignin.m */; };
+		B82A45E11EA9A54500673DA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B82A45E01EA9A54500673DA1 /* GoogleService-Info.plist */; };
 		B863D3AC1EA1A12200081D0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B863D3AB1EA1A12200081D0A /* AppDelegate.swift */; };
 		B863D3AE1EA1A12200081D0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B863D3AD1EA1A12200081D0A /* ViewController.swift */; };
 		B863D3B11EA1A12200081D0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B863D3AF1EA1A12200081D0A /* Main.storyboard */; };
@@ -16,6 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		018037880F2392BBCA870717 /* Pods-iCompanion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCompanion.release.xcconfig"; path = "Pods/Target Support Files/Pods-iCompanion/Pods-iCompanion.release.xcconfig"; sourceTree = "<group>"; };
+		984EBCEC3B4E8FC7206057A4 /* Pods-iCompanion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCompanion.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iCompanion/Pods-iCompanion.debug.xcconfig"; sourceTree = "<group>"; };
+		AC8C1F6995CD41343103F136 /* Pods_iCompanion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iCompanion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B82A45DA1EA999DB00673DA1 /* iCompanion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iCompanion-Bridging-Header.h"; sourceTree = "<group>"; };
+		B82A45DB1EA999DE00673DA1 /* gmailsignin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gmailsignin.m; sourceTree = "<group>"; };
+		B82A45DD1EA99AC300673DA1 /* iCompanion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iCompanion.entitlements; sourceTree = "<group>"; };
+		B82A45E01EA9A54500673DA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B863D3A81EA1A12200081D0A /* iCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B863D3AB1EA1A12200081D0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B863D3AD1EA1A12200081D0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,17 +41,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64CE7FDC84E81B98EC77ABCA /* Pods_iCompanion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48ADD9A3F719D87CBF52122F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC8C1F6995CD41343103F136 /* Pods_iCompanion.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B863D39F1EA1A12200081D0A = {
 			isa = PBXGroup;
 			children = (
 				B863D3AA1EA1A12200081D0A /* iCompanion */,
 				B863D3A91EA1A12200081D0A /* Products */,
+				BF693FC15B33D7C035EC13F4 /* Pods */,
+				48ADD9A3F719D87CBF52122F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +77,28 @@
 		B863D3AA1EA1A12200081D0A /* iCompanion */ = {
 			isa = PBXGroup;
 			children = (
+				B82A45DD1EA99AC300673DA1 /* iCompanion.entitlements */,
 				B863D3AB1EA1A12200081D0A /* AppDelegate.swift */,
 				B863D3AD1EA1A12200081D0A /* ViewController.swift */,
+				B82A45DB1EA999DE00673DA1 /* gmailsignin.m */,
 				B863D3AF1EA1A12200081D0A /* Main.storyboard */,
 				B863D3B51EA1A12200081D0A /* Assets.xcassets */,
 				B863D3B71EA1A12200081D0A /* LaunchScreen.storyboard */,
 				B863D3BA1EA1A12200081D0A /* Info.plist */,
+				B82A45E01EA9A54500673DA1 /* GoogleService-Info.plist */,
 				B863D3B21EA1A12200081D0A /* iCompanion.xcdatamodeld */,
+				B82A45DA1EA999DB00673DA1 /* iCompanion-Bridging-Header.h */,
 			);
 			path = iCompanion;
+			sourceTree = "<group>";
+		};
+		BF693FC15B33D7C035EC13F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				984EBCEC3B4E8FC7206057A4 /* Pods-iCompanion.debug.xcconfig */,
+				018037880F2392BBCA870717 /* Pods-iCompanion.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +108,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B863D3BD1EA1A12200081D0A /* Build configuration list for PBXNativeTarget "iCompanion" */;
 			buildPhases = (
+				B863AD1E90E084B618B61765 /* [CP] Check Pods Manifest.lock */,
 				B863D3A41EA1A12200081D0A /* Sources */,
 				B863D3A51EA1A12200081D0A /* Frameworks */,
 				B863D3A61EA1A12200081D0A /* Resources */,
+				046FD9AB90BFF0DEF108AE9E /* [CP] Embed Pods Frameworks */,
+				45EEB640A47D1D9E205BDEB8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -99,7 +136,14 @@
 				TargetAttributes = {
 					B863D3A71EA1A12200081D0A = {
 						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = UJWD7B9P9D;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -127,12 +171,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				B863D3B91EA1A12200081D0A /* LaunchScreen.storyboard in Resources */,
+				B82A45E11EA9A54500673DA1 /* GoogleService-Info.plist in Resources */,
 				B863D3B61EA1A12200081D0A /* Assets.xcassets in Resources */,
 				B863D3B11EA1A12200081D0A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		046FD9AB90BFF0DEF108AE9E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCompanion/Pods-iCompanion-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		45EEB640A47D1D9E205BDEB8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCompanion/Pods-iCompanion-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B863AD1E90E084B618B61765 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B863D3A41EA1A12200081D0A /* Sources */ = {
@@ -141,6 +234,7 @@
 			files = (
 				B863D3B41EA1A12200081D0A /* iCompanion.xcdatamodeld in Sources */,
 				B863D3AE1EA1A12200081D0A /* ViewController.swift in Sources */,
+				B82A45DC1EA999DE00673DA1 /* gmailsignin.m in Sources */,
 				B863D3AC1EA1A12200081D0A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,24 +356,35 @@
 		};
 		B863D3BE1EA1A12200081D0A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 984EBCEC3B4E8FC7206057A4 /* Pods-iCompanion.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = iCompanion/iCompanion.entitlements;
+				DEVELOPMENT_TEAM = UJWD7B9P9D;
 				INFOPLIST_FILE = iCompanion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = geeyarbabu.iCompanion;
+				PRODUCT_BUNDLE_IDENTIFIER = "geeyarbabu-gmail.com";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iCompanion/iCompanion-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		B863D3BF1EA1A12200081D0A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 018037880F2392BBCA870717 /* Pods-iCompanion.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = iCompanion/iCompanion.entitlements;
+				DEVELOPMENT_TEAM = UJWD7B9P9D;
 				INFOPLIST_FILE = iCompanion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = geeyarbabu.iCompanion;
+				PRODUCT_BUNDLE_IDENTIFIER = "geeyarbabu-gmail.com";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iCompanion/iCompanion-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -303,6 +408,7 @@
 				B863D3BF1EA1A12200081D0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

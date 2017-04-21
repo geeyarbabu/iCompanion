@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GkE-n1-xqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iqR-hD-TyZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wmZ-Td-aZH" id="j8f-ff-yXX">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -44,7 +45,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7yI-md-kev" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="YDd-3O-k8Y"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="o6p-7m-JmO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="o6p-7m-JmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -110,7 +111,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="M6M-Mc-4jB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="inF-5x-W6H"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XO7-lC-lOY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="XO7-lC-lOY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -122,6 +123,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fA8-Vx-hcJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1527.2" y="476.31184407796104"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="obj-4a-fza">
+            <objects>
+                <viewController id="iqR-hD-TyZ" customClass="ViewController" customModule="iCompanion" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bzo-MU-iZ1"/>
+                        <viewControllerLayoutGuide type="bottom" id="V1j-UB-zfI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PKO-kc-5sh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRl-Xm-Cqi" customClass="GIDSignInButton">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.95820913730000001" green="1" blue="0.43271952130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SRl-Xm-Cqi" firstAttribute="leading" secondItem="PKO-kc-5sh" secondAttribute="leadingMargin" constant="51" id="Chr-nH-s6h"/>
+                            <constraint firstItem="SRl-Xm-Cqi" firstAttribute="top" secondItem="Bzo-MU-iZ1" secondAttribute="bottom" constant="249" id="Kqv-Wm-6ff"/>
+                            <constraint firstItem="V1j-UB-zfI" firstAttribute="top" secondItem="SRl-Xm-Cqi" secondAttribute="bottom" constant="270" id="MbU-KY-pmD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SRl-Xm-Cqi" secondAttribute="trailing" constant="52" id="pgH-uP-ovy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="signInButton" destination="SRl-Xm-Cqi" id="HRS-1s-fT3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l2a-Xu-7hC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-478" y="505"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lII-pH-bgt">
@@ -141,7 +175,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6O4-zo-kuH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="476"/>
+            <point key="canvasLocation" x="343" y="476"/>
         </scene>
     </scenes>
 </document>
