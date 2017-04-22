@@ -16,6 +16,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
     
     @IBOutlet weak var signInButton: GIDSignInButton!
     
+     @IBOutlet weak var adminBtnPressed: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,9 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func adminBtnPressed(_ sender: UIButton) {
+    }
+   
 
 }
 

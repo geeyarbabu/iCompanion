@@ -10,12 +10,15 @@
 		64CE7FDC84E81B98EC77ABCA /* Pods_iCompanion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8C1F6995CD41343103F136 /* Pods_iCompanion.framework */; };
 		B82A45DC1EA999DE00673DA1 /* gmailsignin.m in Sources */ = {isa = PBXBuildFile; fileRef = B82A45DB1EA999DE00673DA1 /* gmailsignin.m */; };
 		B82A45E11EA9A54500673DA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B82A45E01EA9A54500673DA1 /* GoogleService-Info.plist */; };
+		B82FEAF01EABF28C003E0080 /* Event_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82FEAEF1EABF28C003E0080 /* Event_Cell.swift */; };
 		B863D3AC1EA1A12200081D0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B863D3AB1EA1A12200081D0A /* AppDelegate.swift */; };
 		B863D3AE1EA1A12200081D0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B863D3AD1EA1A12200081D0A /* ViewController.swift */; };
 		B863D3B11EA1A12200081D0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B863D3AF1EA1A12200081D0A /* Main.storyboard */; };
 		B863D3B41EA1A12200081D0A /* iCompanion.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B863D3B21EA1A12200081D0A /* iCompanion.xcdatamodeld */; };
 		B863D3B61EA1A12200081D0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B863D3B51EA1A12200081D0A /* Assets.xcassets */; };
 		B863D3B91EA1A12200081D0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B863D3B71EA1A12200081D0A /* LaunchScreen.storyboard */; };
+		B8FD58B01EAA93160082A984 /* AdminTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD58AF1EAA93160082A984 /* AdminTVC.swift */; };
+		B8FD58B21EAAA1B10082A984 /* EventsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD58B11EAAA1B10082A984 /* EventsTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,7 @@
 		B82A45DB1EA999DE00673DA1 /* gmailsignin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gmailsignin.m; sourceTree = "<group>"; };
 		B82A45DD1EA99AC300673DA1 /* iCompanion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iCompanion.entitlements; sourceTree = "<group>"; };
 		B82A45E01EA9A54500673DA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B82FEAEF1EABF28C003E0080 /* Event_Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event_Cell.swift; sourceTree = "<group>"; };
 		B863D3A81EA1A12200081D0A /* iCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B863D3AB1EA1A12200081D0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B863D3AD1EA1A12200081D0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +38,8 @@
 		B863D3B51EA1A12200081D0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B863D3B81EA1A12200081D0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B863D3BA1EA1A12200081D0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8FD58AF1EAA93160082A984 /* AdminTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminTVC.swift; sourceTree = "<group>"; };
+		B8FD58B11EAAA1B10082A984 /* EventsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,9 @@
 				B863D3AD1EA1A12200081D0A /* ViewController.swift */,
 				B82A45DB1EA999DE00673DA1 /* gmailsignin.m */,
 				B863D3AF1EA1A12200081D0A /* Main.storyboard */,
+				B8FD58B11EAAA1B10082A984 /* EventsTVC.swift */,
+				B82FEAEF1EABF28C003E0080 /* Event_Cell.swift */,
+				B8FD58AF1EAA93160082A984 /* AdminTVC.swift */,
 				B863D3B51EA1A12200081D0A /* Assets.xcassets */,
 				B863D3B71EA1A12200081D0A /* LaunchScreen.storyboard */,
 				B863D3BA1EA1A12200081D0A /* Info.plist */,
@@ -233,9 +242,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B863D3B41EA1A12200081D0A /* iCompanion.xcdatamodeld in Sources */,
+				B8FD58B01EAA93160082A984 /* AdminTVC.swift in Sources */,
 				B863D3AE1EA1A12200081D0A /* ViewController.swift in Sources */,
 				B82A45DC1EA999DE00673DA1 /* gmailsignin.m in Sources */,
+				B8FD58B21EAAA1B10082A984 /* EventsTVC.swift in Sources */,
 				B863D3AC1EA1A12200081D0A /* AppDelegate.swift in Sources */,
+				B82FEAF01EABF28C003E0080 /* Event_Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
