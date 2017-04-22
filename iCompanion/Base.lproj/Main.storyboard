@@ -103,6 +103,10 @@
                                             <rect key="frame" x="193" y="244" width="34" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="favourites" translatesAutoresizingMaskIntoConstraints="NO" id="BxR-Ef-qjW">
+                                            <rect key="frame" x="317" y="8" width="50" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -122,11 +126,11 @@
             </objects>
             <point key="canvasLocation" x="3112.8000000000002" y="-233.43328335832086"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="el2-EY-WPb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7yI-md-kev" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="YDd-3O-k8Y"/>
+                    <tabBarItem key="tabBarItem" selectedImage="event" systemItem="search" id="YDd-3O-k8Y"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="o6p-7m-JmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -141,11 +145,11 @@
             </objects>
             <point key="canvasLocation" x="1527.2" y="-233.43328335832086"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="aqa-YH-3Ph">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="M6M-Mc-4jB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="inF-5x-W6H"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="inF-5x-W6H"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="XO7-lC-lOY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -636,7 +640,7 @@
             </objects>
             <point key="canvasLocation" x="2466" y="476"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="Km0-z8-3Wk">
             <objects>
                 <tableViewController id="DCM-e0-rYW" sceneMemberID="viewController">
@@ -764,7 +768,7 @@ Departments:</string>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pPC-jZ-laM">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collection_cell-1" id="pPC-jZ-laM">
                                                             <rect key="frame" x="6.5" y="0.0" width="227" height="26"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -780,7 +784,7 @@ Departments:</string>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </view>
                                                         </collectionViewCell>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="IKX-TH-ix1">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collection_cell-2" id="IKX-TH-ix1">
                                                             <rect key="frame" x="6.5" y="72" width="227" height="26"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -816,7 +820,7 @@ Departments:</string>
                             <outlet property="delegate" destination="DCM-e0-rYW" id="sfP-vj-5G0"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="2s4-Q9-Rwt"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="event" id="2s4-Q9-Rwt"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhp-Im-uAV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -843,8 +847,10 @@ Departments:</string>
     </scenes>
     <resources>
         <image name="call" width="225" height="225"/>
-        <image name="going" width="300" height="300"/>
-        <image name="interested" width="1668" height="1668"/>
+        <image name="event" width="20" height="20"/>
+        <image name="favourites" width="128" height="128"/>
+        <image name="going" width="512" height="512"/>
+        <image name="interested" width="626" height="626"/>
         <image name="mail" width="1024" height="1024"/>
     </resources>
 </document>
