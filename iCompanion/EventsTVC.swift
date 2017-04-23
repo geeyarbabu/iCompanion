@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class EventsTVC: UITableViewController {
+class EventsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
 
     
     var event : [Event] = []
@@ -81,6 +82,33 @@ class EventsTVC: UITableViewController {
         }
     }
     
+    var event_data = Event()
+    var mail : String = " "
+    
+    static func sendMail()
+    {
+       // mail = event_data.email!
+        let mailCompose = MFMailComposeViewController()
+        
+        
+        mailCompose.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
+        
+        mailCompose.setToRecipients(["geeyarbabu@gmail.com"])
+        
+        // +  "\(String(describing: event_data.title))"
+        mailCompose.setSubject("Reg: Inquiry regarding")
+        
+        //+"\n"+"I would like to inquire about event"+"\(String(describing: event_data.title))"+"Could you please provide me more information about it"
+        mailCompose.setMessageBody("Hi,", isHTML: false)
+        
+        if MFMailComposeViewController.canSendMail(){
+            
+        }
+        else{
+            print("Hata...!")
+        }
+        
+    }
     
     /*
     // Override to support conditional editing of the table view.

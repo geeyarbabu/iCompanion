@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--EventsTVC-->
+        <!--Title-->
         <scene sceneID="p8H-5c-el2">
             <objects>
-                <tableViewController id="aC8-4L-WAA" customClass="EventsTVC" customModule="iCompanion" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="currentContext" id="aC8-4L-WAA" customClass="EventsTVC" customModule="iCompanion" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="293" sectionHeaderHeight="28" sectionFooterHeight="28" id="vtf-hf-wQf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,11 +48,17 @@
                                             <rect key="frame" x="245" y="121" width="122" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Call Organiser"/>
+                                            <connections>
+                                                <action selector="callOrganiser:" destination="C2u-6P-K9E" eventType="touchUpInside" id="uVc-lu-xDc"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lsG-yf-AMC">
                                             <rect key="frame" x="245" y="159" width="122" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Mail Organiser"/>
+                                            <connections>
+                                                <action selector="mailOrganizer:" destination="C2u-6P-K9E" eventType="touchUpInside" id="qaQ-Q8-dG9"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="interested" translatesAutoresizingMaskIntoConstraints="NO" id="Bge-Cy-dxp">
                                             <rect key="frame" x="8" y="244" width="34" height="30"/>
@@ -62,6 +68,9 @@
                                             <rect key="frame" x="208" y="197" width="159" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Get Directions"/>
+                                            <connections>
+                                                <action selector="getDirections:" destination="C2u-6P-K9E" eventType="touchUpInside" id="qev-Po-T1O"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XKx-dq-w98">
                                             <rect key="frame" x="56" y="244" width="129" height="30"/>
@@ -112,6 +121,7 @@
                                 <connections>
                                     <outlet property="event_description" destination="tu8-LV-Bwo" id="XPn-Bo-fpm"/>
                                     <outlet property="event_title" destination="mBP-UB-rV6" id="ddV-0M-38x"/>
+                                    <outlet property="mapView" destination="cau-pp-yoh" id="jhc-zW-LvZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -120,7 +130,9 @@
                             <outlet property="delegate" destination="aC8-4L-WAA" id="XIh-C9-Lau"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ura-Ee-O0o"/>
+                    <navigationItem key="navigationItem" title="Title" id="tV1-gu-caL">
+                        <barButtonItem key="backBarButtonItem" title="back" id="6S6-EO-84x"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iiA-ig-hdC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -462,7 +474,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZX2-7v-lxG">
-                                                    <rect key="frame" x="132" y="17" width="234" height="30"/>
+                                                    <rect key="frame" x="132" y="17" width="234" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </pickerView>
                                             </subviews>

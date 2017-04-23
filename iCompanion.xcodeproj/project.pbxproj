@@ -11,6 +11,9 @@
 		B82A45DC1EA999DE00673DA1 /* gmailsignin.m in Sources */ = {isa = PBXBuildFile; fileRef = B82A45DB1EA999DE00673DA1 /* gmailsignin.m */; };
 		B82A45E11EA9A54500673DA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B82A45E01EA9A54500673DA1 /* GoogleService-Info.plist */; };
 		B82FEAF01EABF28C003E0080 /* Event_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82FEAEF1EABF28C003E0080 /* Event_Cell.swift */; };
+		B82FEAF21EAC06D7003E0080 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82FEAF11EAC06D7003E0080 /* MessageUI.framework */; };
+		B82FEAF41EAC306F003E0080 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82FEAF31EAC306F003E0080 /* MapKit.framework */; };
+		B82FEAF61EAC3738003E0080 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82FEAF51EAC3738003E0080 /* CoreLocation.framework */; };
 		B863D3AC1EA1A12200081D0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B863D3AB1EA1A12200081D0A /* AppDelegate.swift */; };
 		B863D3AE1EA1A12200081D0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B863D3AD1EA1A12200081D0A /* ViewController.swift */; };
 		B863D3B11EA1A12200081D0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B863D3AF1EA1A12200081D0A /* Main.storyboard */; };
@@ -30,6 +33,9 @@
 		B82A45DD1EA99AC300673DA1 /* iCompanion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iCompanion.entitlements; sourceTree = "<group>"; };
 		B82A45E01EA9A54500673DA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B82FEAEF1EABF28C003E0080 /* Event_Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event_Cell.swift; sourceTree = "<group>"; };
+		B82FEAF11EAC06D7003E0080 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		B82FEAF31EAC306F003E0080 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B82FEAF51EAC3738003E0080 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B863D3A81EA1A12200081D0A /* iCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B863D3AB1EA1A12200081D0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B863D3AD1EA1A12200081D0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +53,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82FEAF61EAC3738003E0080 /* CoreLocation.framework in Frameworks */,
+				B82FEAF21EAC06D7003E0080 /* MessageUI.framework in Frameworks */,
+				B82FEAF41EAC306F003E0080 /* MapKit.framework in Frameworks */,
 				64CE7FDC84E81B98EC77ABCA /* Pods_iCompanion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,6 +66,9 @@
 		48ADD9A3F719D87CBF52122F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B82FEAF51EAC3738003E0080 /* CoreLocation.framework */,
+				B82FEAF31EAC306F003E0080 /* MapKit.framework */,
+				B82FEAF11EAC06D7003E0080 /* MessageUI.framework */,
 				AC8C1F6995CD41343103F136 /* Pods_iCompanion.framework */,
 			);
 			name = Frameworks;
@@ -150,6 +162,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
 						};
