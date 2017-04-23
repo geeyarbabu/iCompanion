@@ -11,19 +11,73 @@ import MessageUI
 
 class EventsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
 
-    
+    var getMood: Timer!
     var event : [Event] = []
-    
+    static var happyCounter = 0
+    static var sadCounter = 0
   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        getMood = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(displayAlert), userInfo: nil, repeats: true)
     
+        
               // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    
+    
+    func displayAlert()
+    {
+        
+//        let alert = UIAlertController(title: "HI", message: "How is your mood today", preferredStyle: UIAlertControllerStyle.alert)
+//        
+//        
+//        alert.addAction(UIAlertAction(title: "HAPPY", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in EventsTVC.happyCounter += 1 }))
+//        
+//        alert.addAction(UIAlertAction(title: "SAD", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in EventsTVC.sadCounter += 1 }))
+//        
+//        self.present(alert, animated: true, completion: nil)
+//        
+//        if EventsTVC.sadCounter >= 2
+//        {
+//            
+//            alertTwo()
+//            
+//        }
+        
+        
+        let sadAlert = UIAlertController(title: "HI Buddy", message: "you are worried for the past few minutes", preferredStyle: UIAlertControllerStyle.alert)
+        //let cancel = UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil)
+        
+        sadAlert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
+        
+        self.present(sadAlert, animated: true, completion: nil)
+        
+        
+        
+        
+    }
+    
+    
+    func alertTwo()
+    {
+        getMood.invalidate()
+        getMood = nil
+        
+//        let sadAlert = UIAlertController(title: "HI Buddy", message: "you are worried for the past few minutes", preferredStyle: UIAlertControllerStyle.alert)
+//        //let cancel = UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil)
+//        
+//        sadAlert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
+//        
+//        self.present(sadAlert, animated: true, completion: nil)
+        
+        print("bgjhgb")
     }
 
     
@@ -82,78 +136,48 @@ class EventsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
         }
     }
     
-    var event_data = Event()
-    var mail : String = " "
+ 
     
-    static func sendMail()
-    {
-       // mail = event_data.email!
-        let mailCompose = MFMailComposeViewController()
-        
-        
-        mailCompose.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
-        
-        mailCompose.setToRecipients(["geeyarbabu@gmail.com"])
-        
-        // +  "\(String(describing: event_data.title))"
-        mailCompose.setSubject("Reg: Inquiry regarding")
-        
-        //+"\n"+"I would like to inquire about event"+"\(String(describing: event_data.title))"+"Could you please provide me more information about it"
-        mailCompose.setMessageBody("Hi,", isHTML: false)
-        
-        if MFMailComposeViewController.canSendMail(){
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let shareAction = UITableViewRowAction(style: .normal, title:"Mail the Organiser") { (action: UITableViewRowAction!, indexPath: IndexPath!) -> Void in
+            
+            
+            let mailCompose = MFMailComposeViewController()
+            
+            
+            mailCompose.mailComposeDelegate = self
+            
+            
+            mailCompose.setToRecipients([self.event[indexPath.row].email!])
+            
+            // +  "\(String(describing: event_data.title))"
+            mailCompose.setSubject("Reg: Inquiry regarding")
+            
+            
+            mailCompose.setMessageBody("Hi,"+"\n"+"I would like to inquire about event "+"\(String(describing: self.event[indexPath.row].title!))"+". Could you please provide me more information about it?", isHTML: false)
+            
+            if MFMailComposeViewController.canSendMail(){
+                
+                self.present(mailCompose, animated: true, completion: nil)
+                
+            }
+            else{
+                print("Error...!")
+            }
+
+            
+            
+            
             
         }
-        else{
-            print("Hata...!")
-        }
         
+        return [shareAction]
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
 

@@ -10,9 +10,33 @@
         <attribute name="phone_no" attributeType="String" syncable="YES"/>
         <attribute name="street" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="canBeFavourited" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favourites" inverseName="isOfType" inverseEntity="Favourites" syncable="YES"/>
+        <relationship name="canBeGoing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Going" inverseName="isOfType" inverseEntity="Going" syncable="YES"/>
+        <relationship name="canBeInterested" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Interested" inverseName="isOfType" inverseEntity="Interested" syncable="YES"/>
+    </entity>
+    <entity name="Favourites" representedClassName="Favourites" syncable="YES" codeGenerationType="class">
+        <attribute name="event_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="event_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="isOfType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="canBeFavourited" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Going" representedClassName="Going" syncable="YES" codeGenerationType="class">
+        <attribute name="event_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="event_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="isOfType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="canBeGoing" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Interested" representedClassName="Interested" syncable="YES" codeGenerationType="class">
+        <attribute name="event_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="event_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="isOfType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="canBeInterested" inverseEntity="Event" syncable="YES"/>
     </entity>
     <fetchRequest name="FetchRequest" entity="Event"/>
     <elements>
-        <element name="Event" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Event" positionX="-146" positionY="-18" width="128" height="223"/>
+        <element name="Favourites" positionX="52" positionY="54" width="128" height="103"/>
+        <element name="Interested" positionX="27" positionY="227" width="128" height="103"/>
+        <element name="Going" positionX="-308" positionY="227" width="128" height="103"/>
     </elements>
 </model>

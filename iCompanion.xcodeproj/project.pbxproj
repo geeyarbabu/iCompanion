@@ -20,6 +20,7 @@
 		B863D3B41EA1A12200081D0A /* iCompanion.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B863D3B21EA1A12200081D0A /* iCompanion.xcdatamodeld */; };
 		B863D3B61EA1A12200081D0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B863D3B51EA1A12200081D0A /* Assets.xcassets */; };
 		B863D3B91EA1A12200081D0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B863D3B71EA1A12200081D0A /* LaunchScreen.storyboard */; };
+		B889BA621EAD111C0068649A /* FavouritesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B889BA611EAD111C0068649A /* FavouritesTVC.swift */; };
 		B8FD58B01EAA93160082A984 /* AdminTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD58AF1EAA93160082A984 /* AdminTVC.swift */; };
 		B8FD58B21EAAA1B10082A984 /* EventsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD58B11EAAA1B10082A984 /* EventsTVC.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		B863D3B51EA1A12200081D0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B863D3B81EA1A12200081D0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B863D3BA1EA1A12200081D0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B889BA611EAD111C0068649A /* FavouritesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesTVC.swift; sourceTree = "<group>"; };
 		B8FD58AF1EAA93160082A984 /* AdminTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminTVC.swift; sourceTree = "<group>"; };
 		B8FD58B11EAAA1B10082A984 /* EventsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +102,7 @@
 				B863D3AD1EA1A12200081D0A /* ViewController.swift */,
 				B82A45DB1EA999DE00673DA1 /* gmailsignin.m */,
 				B863D3AF1EA1A12200081D0A /* Main.storyboard */,
+				B889BA611EAD111C0068649A /* FavouritesTVC.swift */,
 				B8FD58B11EAAA1B10082A984 /* EventsTVC.swift */,
 				B82FEAEF1EABF28C003E0080 /* Event_Cell.swift */,
 				B8FD58AF1EAA93160082A984 /* AdminTVC.swift */,
@@ -259,6 +262,7 @@
 				B863D3B41EA1A12200081D0A /* iCompanion.xcdatamodeld in Sources */,
 				B8FD58B01EAA93160082A984 /* AdminTVC.swift in Sources */,
 				B863D3AE1EA1A12200081D0A /* ViewController.swift in Sources */,
+				B889BA621EAD111C0068649A /* FavouritesTVC.swift in Sources */,
 				B82A45DC1EA999DE00673DA1 /* gmailsignin.m in Sources */,
 				B8FD58B21EAAA1B10082A984 /* EventsTVC.swift in Sources */,
 				B863D3AC1EA1A12200081D0A /* AppDelegate.swift in Sources */,

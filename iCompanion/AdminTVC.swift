@@ -65,7 +65,18 @@ class AdminTVC: UITableViewController {
         
         container.saveContext()
         
-        event_title.text="saved"
+        
+        let alert = UIAlertController(title: "Saved", message: "Event Saved. Thanks for your participation", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in self.event_title.text = ""
+            self.event_description.text = ""
+            self.date_of_event.text = ""
+            self.street_name.text = ""
+            self.house_number.text = ""
+            self.event_city.text = ""
+            self.email.text = ""
+            self.phone_number.text = ""
+        }))
+                self.present(alert, animated: true, completion: nil)
         
             }
 

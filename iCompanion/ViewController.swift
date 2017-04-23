@@ -12,7 +12,7 @@ import GoogleSignIn
 
 class ViewController: UIViewController, GIDSignInUIDelegate {
     
-    
+    //var getMood: Timer!
     
     @IBOutlet weak var signInButton: GIDSignInButton!
     
@@ -20,6 +20,8 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //getMood = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(displayAlert), userInfo: nil, repeats: true)
         // Do any additional setup after loading the view, typically from a nib.
         
         GIDSignIn.sharedInstance().uiDelegate = self
@@ -28,8 +30,8 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         
         
     }
-
-    override func didReceiveMemoryWarning() {
+    
+        override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

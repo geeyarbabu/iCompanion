@@ -10,11 +10,13 @@ import UIKit
 import MessageUI
 import MapKit
 import CoreLocation
+import  Firebase
 
 class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var event_title: UILabel!
     
+    @IBOutlet weak var event_date: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
     let eventTVC = EventsTVC()
@@ -56,8 +58,12 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         event_description.text = event_data.event_description
         call = event_data.phone_no!
         mail = event_data.email!
+        event_date.text = event_data.date_of_event!
         
-       fetchAddress()
+        
+        fetchAddress()
+        
+        
     }
     
     func fetchAddress(){
@@ -144,7 +150,7 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         ]
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = "university college dublin"
+        mapItem.name = "\(String(describing: event_data.title))"
         mapItem.openInMaps(launchOptions: options)
 
     }
@@ -175,11 +181,66 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = "Home"
-        annotation.subtitle = "Come Home"
+        annotation.title = "Event Location"
+        annotation.subtitle = "\(String(describing: event_data.title!))"
         
         mapView.addAnnotation(annotation)
     }
 
 
+    @IBAction func favourites_pressed(_ sender: UIButton) {
+        
+        let container = UIApplication.shared.delegate as! AppDelegate
+        let context = container.persistentContainer.viewContext
+        
+        let favourite = Favourites(context: context)
+        
+        favourite.event_title = event_data.title!
+        favourite.event_date = event_data.date_of_event!
+        let user = FIRAuth.auth()?.currentUser
+        if let userName = user{
+            favourite.user_name = userName.email!
+        }
+        
+       eventTVC.displayAlert()
+    }
+    
+    
+    @IBAction func interested_pressed(_ sender: UIButton) {
+        
+        let container = UIApplication.shared.delegate as! AppDelegate
+        let context = container.persistentContainer.viewContext
+        
+        let interest = Interested(context: context)
+        
+        interest.event_title = event_data.title!
+        interest.event_date = event_data.date_of_event!
+        let user = FIRAuth.auth()?.currentUser
+        if let userName = user{
+            interest.user_name = userName.email!
+        }
+        
+        
+        
+
+    }
+    
+    
+    @IBAction func going_pressed(_ sender: UIButton) {
+        
+        let container = UIApplication.shared.delegate as! AppDelegate
+        let context = container.persistentContainer.viewContext
+        
+        let going = Going(context: context)
+        
+        going.event_title = event_data.title!
+        going.event_date = event_data.date_of_event!
+        let user = FIRAuth.auth()?.currentUser
+        if let userName = user{
+            going.user_name = userName.email!
+        }
+
+        
+    }
+    
 }
