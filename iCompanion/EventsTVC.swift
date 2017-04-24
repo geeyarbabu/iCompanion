@@ -8,22 +8,24 @@
 
 import UIKit
 import MessageUI
+import UserNotifications
 
-class EventsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
+class EventsTVC: UITableViewController, UNUserNotificationCenterDelegate, MFMailComposeViewControllerDelegate {
 
     var getMood: Timer!
     var event : [Event] = []
-    static var happyCounter = 0
-    static var sadCounter = 0
+    
   
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getMood = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(displayAlert), userInfo: nil, repeats: true)
     
+
+//        getMood = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(displayAlert), userInfo: nil, repeats: true)
+//    
         
-              // Uncomment the following line to preserve selection between presentations
+        // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -32,9 +34,9 @@ class EventsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
     
     
     
-    func displayAlert()
-    {
-        
+//    func displayAlert()
+//    {
+//        
 //        let alert = UIAlertController(title: "HI", message: "How is your mood today", preferredStyle: UIAlertControllerStyle.alert)
 //        
 //        
@@ -50,25 +52,7 @@ class EventsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
 //            alertTwo()
 //            
 //        }
-        
-        
-        let sadAlert = UIAlertController(title: "HI Buddy", message: "you are worried for the past few minutes", preferredStyle: UIAlertControllerStyle.alert)
-        //let cancel = UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil)
-        
-        sadAlert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
-        
-        self.present(sadAlert, animated: true, completion: nil)
-        
-        
-        
-        
-    }
     
-    
-    func alertTwo()
-    {
-        getMood.invalidate()
-        getMood = nil
         
 //        let sadAlert = UIAlertController(title: "HI Buddy", message: "you are worried for the past few minutes", preferredStyle: UIAlertControllerStyle.alert)
 //        //let cancel = UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil)
@@ -76,9 +60,26 @@ class EventsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
 //        sadAlert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
 //        
 //        self.present(sadAlert, animated: true, completion: nil)
+//        
         
-        print("bgjhgb")
-    }
+        
+    
+    
+    
+//    func alertTwo()
+//    {
+//        getMood.invalidate()
+//        getMood = nil
+//        
+//        let sadAlert = UIAlertController(title: "HI Buddy", message: "you are worried for the past few minutes", preferredStyle: UIAlertControllerStyle.alert)
+//        //let cancel = UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil)
+//        
+//        sadAlert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
+//        
+//        self.present(sadAlert, animated: true, completion: nil)
+//        
+//        print("bgjhgb")
+//    }
 
     
     override func viewWillAppear(_ animated: Bool) {

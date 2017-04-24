@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 import MapKit
 import CoreLocation
-import  Firebase
+import Firebase
 
 class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
 
@@ -18,6 +18,7 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var event_date: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var favouritesButton: UIButton!
     
     let eventTVC = EventsTVC()
     
@@ -29,6 +30,7 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
     var manager = CLLocationManager()
     let latZoom:CLLocationDegrees = 0.01
     let longZoom:CLLocationDegrees = 0.01
+    
     
     
     @IBOutlet weak var event_description: UILabel!
@@ -202,7 +204,29 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
             favourite.user_name = userName.email!
         }
         
-       eventTVC.displayAlert()
+//        do {
+//            
+//            let favoFetch : [Favourites] = try context.fetch(Favourites.fetchRequest()) as! [Favourites]
+//            for fav in favoFetch{
+//                if fav.event_title == event_data.title!{
+//                    Event_Cell.foundFlag = 1
+//                }
+//            }
+//            
+//            
+//        }
+//        catch{
+//            print("error")
+//        }
+        
+
+        container.saveContext()
+        
+        //eventTVC.displayAlert()
+        
+       
+        sender.setImage(#imageLiteral(resourceName: "favourited"), for: UIControlState.normal)
+        sender.isUserInteractionEnabled = false
     }
     
     
@@ -220,7 +244,9 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
             interest.user_name = userName.email!
         }
         
+        container.saveContext()
         
+    
         
 
     }

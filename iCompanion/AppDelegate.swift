@@ -10,10 +10,11 @@ import UIKit
 import CoreData
 import Firebase
 import GoogleSignIn
+import UserNotifications
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
 
@@ -22,14 +23,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Override point for customization after application launch.
         
         
+        //notification
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {allowed, error in
+            //
+        }
+        UNUserNotificationCenter.current().delegate = self
+        
+        //mail
         FIRApp.configure()
-        
-        
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-        
         return true
+    }
+    
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
+    }
+    
+    
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == "happy"
+        {
+            ViewController.happyCounter = ViewController.happyCounter + 1
+            
+        }
+        else{
+            
+            ViewController.sadCounter = ViewController .sadCounter + 1
+        }
     }
     
     
@@ -39,15 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                                                  sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                                  annotation: [:])
         
-        
-        
-        
-        
-        
-        
-        
-        
     }
+    
+    
+    
+    
+    
+    
+    
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         // ...
@@ -59,10 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         guard let authentication = user.authentication else { return }
         let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                           accessToken: authentication.accessToken)
-        
-        
-        
-        
         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
             // ...
             if error != nil {
@@ -72,26 +91,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
+    
+    
+    
+    
+    
+    
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
         // ...
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 

@@ -10,14 +10,26 @@ import UIKit
 
 class FavouritesTVC: UITableViewController {
 
-    @IBOutlet weak var FavouritesTableView: UITableView!
-    @IBOutlet weak var InterestedTableView: UITableView!
-    @IBOutlet weak var GoingTableView: UITableView!
     
+    @IBOutlet var favTable: UITableView!
     
-    
+    var favo : [Favourites] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+        let container = UIApplication.shared.delegate as! AppDelegate
+        
+        let context = container.persistentContainer.viewContext
+        
+        do {
+            
+            favo = try context.fetch(Favourites.fetchRequest())
+        }
+        catch{
+            print("error")
+        }
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,23 +47,26 @@ class FavouritesTVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return favo.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath)
 
         // Configure the cell...
-
+        
+        if favo.count > 0 {
+        cell.textLabel?.text = favo[indexPath.row].event_title!
+        }
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.
