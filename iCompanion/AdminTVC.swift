@@ -10,7 +10,10 @@ import UIKit
 import CoreData
 
 
-class AdminTVC: UITableViewController {
+class AdminTVC: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    
+    var model = ModelClass()
     
     @IBOutlet weak var event_title: UITextField!
     @IBOutlet weak var event_description: UITextField!
@@ -20,13 +23,35 @@ class AdminTVC: UITableViewController {
     @IBOutlet weak var date_of_event: UITextField!
     @IBOutlet weak var phone_number: UITextField!
     @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var department: UIPickerView!
-    
+    @IBOutlet weak var department: UITextField!
+  
+//    var dept = ["Computer Science" , "Engineering" , "Science", "Electronics"]
+//    let picker = UIPickerView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        model.picker.delegate = self
+        model.picker.dataSource = self
+        department.inputView = model.picker
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return model.dept.count
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return model.dept[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        department.text = model.dept[row]
+        self.view.endEditing(false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,22 +73,7 @@ class AdminTVC: UITableViewController {
     
     @IBAction func addBtnPressed(_ sender: Any) {
         
-        let container = UIApplication.shared.delegate as! AppDelegate
-        let context = container.persistentContainer.viewContext
-        
-        let event = Event(context: context)
-        
-        event.title = event_title.text!
-        event.event_description = event_description.text!
-        event.house_no = house_number.text!
-        event.street = street_name.text!
-        event.city = event_city.text!
-        event.date_of_event = date_of_event.text!
-        event.phone_no = phone_number.text!
-        event.email = email.text!
-        event.department = "testing"
-        
-        container.saveContext()
+        model.saveEvent(event_title: event_title.text!, event_description: event_description.text!, house_number: house_number.text!, street_name: street_name.text!, event_city: event_city.text!, date_of_event: date_of_event.text!, phone_number: phone_number.text!, email: email.text!, department: department.text!)
         
         
         let alert = UIAlertController(title: "Saved", message: "Event Saved. Thanks for your participation", preferredStyle: UIAlertControllerStyle.alert)

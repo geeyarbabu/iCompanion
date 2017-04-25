@@ -16,6 +16,7 @@
     </entity>
     <entity name="Favourites" representedClassName="Favourites" syncable="YES" codeGenerationType="class">
         <attribute name="event_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="event_description" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="event_title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="isOfType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="canBeFavourited" inverseEntity="Event" syncable="YES"/>
@@ -34,9 +35,9 @@
     </entity>
     <fetchRequest name="FetchRequest" entity="Event"/>
     <elements>
-        <element name="Event" positionX="-146" positionY="-18" width="128" height="223"/>
-        <element name="Favourites" positionX="52" positionY="54" width="128" height="103"/>
-        <element name="Interested" positionX="27" positionY="227" width="128" height="103"/>
+        <element name="Event" positionX="-146" positionY="-18" width="128" height="225"/>
+        <element name="Favourites" positionX="52" positionY="54" width="128" height="120"/>
         <element name="Going" positionX="-308" positionY="227" width="128" height="103"/>
+        <element name="Interested" positionX="27" positionY="227" width="128" height="103"/>
     </elements>
 </model>

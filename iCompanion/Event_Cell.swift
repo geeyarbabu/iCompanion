@@ -19,24 +19,18 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var event_date: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var favouritesButton: UIButton!
+    @IBOutlet weak var interestImage: UIImageView!
+    @IBOutlet weak var interestButton: UIButton!
+    @IBOutlet weak var goingImage: UIImageView!
+    @IBOutlet weak var goingButton: UIButton!
+    @IBOutlet weak var getDirectionButton: UIButton!
     
-    let eventTVC = EventsTVC()
-    
-    let geoCoder = CLGeocoder()
-    
-    var latitude: CLLocationDegrees? = nil
-    var longitude: CLLocationDegrees? = nil
-    
-    var manager = CLLocationManager()
-    let latZoom:CLLocationDegrees = 0.01
-    let longZoom:CLLocationDegrees = 0.01
-    
-    
+    var model = ModelClass()
     
     @IBOutlet weak var event_description: UILabel!
     var event_data = Event() {
         didSet {
-            refreshCell()
+           refreshCell()
         }
     }
     
@@ -51,18 +45,36 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         // Configure the view for the selected state
     }
     
-    var call : String = " "
-    var mail : String = " "
+
     
     func refreshCell()
     {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        let date = formatter.date(from: event_data.date_of_event!)
+        let currentDate = Date()
+        if( date! > currentDate){
         event_title.text = event_data.title
+            
         event_description.text = event_data.event_description
-        call = event_data.phone_no!
-        mail = event_data.email!
+            
+        event_date.text = event_data.date_of_event!
+            
+          
+        }
+        else {
+        event_title.text = event_data.title! + "(Missed)"
+        
+        event_description.text = event_data.event_description! + " \n[The event date has lapsed]"
+        
         event_date.text = event_data.date_of_event!
         
+        favouritesButton.isEnabled = false
+        interestButton.isEnabled = false
+        goingButton.isEnabled = false
+        }
         
+        setupButtons()
         fetchAddress()
         
         
@@ -73,7 +85,7 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         let address = "\(event_data.house_no!)"+","+"\(event_data.street!)"+","+"\(event_data.city!)"
         
        // let address = "\(event_data.city!)"
-        geoCoder.geocodeAddressString(address, completionHandler: {(placemarks,error) -> Void in
+        model.geoCoder.geocodeAddressString(address, completionHandler: {(placemarks,error) -> Void in
             if error != nil {
                 print("error")
             }
@@ -81,79 +93,72 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
                 
                 if let placemark = placemarks?[0] {
                     
-                    self.latitude = placemark.location!.coordinate.latitude
-                    self.longitude = placemark.location!.coordinate.longitude
+                    self.model.latitude = placemark.location!.coordinate.latitude
+                    self.model.longitude = placemark.location!.coordinate.longitude
                     self.setupMap()
                     self.addAnnotation()
                 }
             }
         })
         
-//        
-//        setupMap()
-//        addAnnotation()
+
+    }
+    
+    
+    func setupButtons()
+    {
+        model.fetchFavourites()
+        for favItem in model.favo
+        {
+            if favItem.event_title == event_data.title
+            {
+                favouritesButton.setImage(#imageLiteral(resourceName: "favourited"), for: UIControlState.normal)
+                favouritesButton.isUserInteractionEnabled = false
+                
+            }
+        }
+        
+        model.fetchInterested()
+        for interstItem in model.interest
+        {
+            if interstItem.event_title == event_data.title
+            {
+                interestImage.image = #imageLiteral(resourceName: "InterestedYes")
+                interestButton.isUserInteractionEnabled = false
+                interestButton.isEnabled = false
+                
+                
+            }
+        }
+        
+        model.fetchGoing()
+        for goingItem in model.going
+        {
+            if goingItem.event_title == event_data.title
+            {
+                goingImage.image = #imageLiteral(resourceName: "goingYes")
+                goingButton.isUserInteractionEnabled = false
+               
+            }
+        }
+
+        
+        
     }
     
     @IBAction func callOrganiser(_ sender: UIButton) {
-        let url: NSURL = URL(string: "TEL://"+"\(call)")! as NSURL
+        let url: NSURL = URL(string: "TEL://"+"\(event_data.phone_no!)")! as NSURL
         UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
     }
     
-    @IBAction func mailOrganizer(_ sender: UIButton) {
-        
-        let mailCompose = MFMailComposeViewController()
-    
-        
-        mailCompose.mailComposeDelegate = self
-        
-        mailCompose.setToRecipients(["geeyarbabu@gmail.com"])
-        
-        // +  "\(String(describing: event_data.title))"
-        mailCompose.setSubject("Reg: Inquiry regarding")
-        
-        //+"\n"+"I would like to inquire about event"+"\(String(describing: event_data.title))"+"Could you please provide me more information about it"
-        mailCompose.setMessageBody("Hi,", isHTML: false)
-        
-        if MFMailComposeViewController.canSendMail(){
-           // self.present(mailCompose, animated: true, completion: nil)
-          //  UIApplication.shared.keyWindow?.rootViewController?.present(mailCompose, animated: true, completion: nil)
-      
-            self.window?.rootViewController?.present(mailCompose, animated: true, completion: nil)
-            
-            
-        }
-        else{
-            print("Error...!")
-        }
-        
-    
-        
-        
-        
-       // EventsTVC.sendMail()
-    }
-    
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
     @IBAction func getDirections(_ sender: UIButton) {
         
-        
-        let regionDistance:CLLocationDistance = 10000
-        let coordinates = CLLocationCoordinate2DMake(self.latitude!, self.longitude!)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
-        let options = [
-            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
-            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
-        ]
-        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = "\(String(describing: event_data.title))"
-        mapItem.openInMaps(launchOptions: options)
+        if model.latitude == nil || model.longitude == nil {
+            self.getDirectionButton.isEnabled = false
+        }
+        else {
+      self.model.getDirection(eventTitle: event_data.title!)
+        }
 
     }
     
@@ -161,9 +166,9 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
     func setupMap()
     {
         
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(latZoom, longZoom)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(model.latZoom, model.longZoom)
         
-        let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(self.latitude!, self.longitude!)
+        let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(model.latitude!, model.longitude!)
         
         
         let region:MKCoordinateRegion = MKCoordinateRegionMake(location, span)
@@ -178,7 +183,7 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         
         
       
-        let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude!, longitude!)
+        let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(model.latitude!, model.longitude!)
         
         
         let annotation = MKPointAnnotation()
@@ -191,62 +196,21 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
 
 
     @IBAction func favourites_pressed(_ sender: UIButton) {
+    
+        model.saveFavourite(eventTitle: event_data.title!, eventDate: event_data.date_of_event!, eventDescription: event_data.event_description!)
         
-        let container = UIApplication.shared.delegate as! AppDelegate
-        let context = container.persistentContainer.viewContext
-        
-        let favourite = Favourites(context: context)
-        
-        favourite.event_title = event_data.title!
-        favourite.event_date = event_data.date_of_event!
-        let user = FIRAuth.auth()?.currentUser
-        if let userName = user{
-            favourite.user_name = userName.email!
-        }
-        
-//        do {
-//            
-//            let favoFetch : [Favourites] = try context.fetch(Favourites.fetchRequest()) as! [Favourites]
-//            for fav in favoFetch{
-//                if fav.event_title == event_data.title!{
-//                    Event_Cell.foundFlag = 1
-//                }
-//            }
-//            
-//            
-//        }
-//        catch{
-//            print("error")
-//        }
-        
-
-        container.saveContext()
-        
-        //eventTVC.displayAlert()
-        
-       
         sender.setImage(#imageLiteral(resourceName: "favourited"), for: UIControlState.normal)
         sender.isUserInteractionEnabled = false
     }
     
     
     @IBAction func interested_pressed(_ sender: UIButton) {
-        
-        let container = UIApplication.shared.delegate as! AppDelegate
-        let context = container.persistentContainer.viewContext
-        
-        let interest = Interested(context: context)
-        
-        interest.event_title = event_data.title!
-        interest.event_date = event_data.date_of_event!
-        let user = FIRAuth.auth()?.currentUser
-        if let userName = user{
-            interest.user_name = userName.email!
-        }
-        
-        container.saveContext()
-        
     
+        model.saveInterested(eventTitle: event_data.title!, eventDate: event_data.date_of_event!)
+        
+        interestImage.image = #imageLiteral(resourceName: "InterestedYes")
+        interestButton.isUserInteractionEnabled = false
+        
         
 
     }
@@ -254,19 +218,10 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
     
     @IBAction func going_pressed(_ sender: UIButton) {
         
-        let container = UIApplication.shared.delegate as! AppDelegate
-        let context = container.persistentContainer.viewContext
+        model.saveGoing(eventTitle: event_data.title!, eventDate: event_data.date_of_event!)
         
-        let going = Going(context: context)
-        
-        going.event_title = event_data.title!
-        going.event_date = event_data.date_of_event!
-        let user = FIRAuth.auth()?.currentUser
-        if let userName = user{
-            going.user_name = userName.email!
-        }
-
-        
+        goingImage.image = #imageLiteral(resourceName: "goingYes")
+        goingButton.isUserInteractionEnabled = false
     }
     
 }

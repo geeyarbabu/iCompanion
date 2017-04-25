@@ -15,57 +15,23 @@ import MessageUI
 class ViewController: UIViewController, UNUserNotificationCenterDelegate, GIDSignInUIDelegate {
     
     
-    var getMood: Timer!
-    
-    static var happyCounter = 0
-    static var sadCounter = 0
-    static var counter = 0
+    //var model = ModelClass()
     
     
-    @IBOutlet weak var signInButton: GIDSignInButton!
+    var moodTimer: Timer!
     
-     @IBOutlet weak var adminBtnPressed: UIButton!
-
+     static var happyCounter = 0
+     static var sadCounter = 0
+     static var resetCounter = 0
+    
+    
+        @IBOutlet weak var adminBtnPressed: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let happy = UNNotificationAction(identifier: "happy", title: "happy", options: .foreground)
-//        
-//        let sad = UNNotificationAction(identifier: "sad", title: "sad", options: .foreground)
-//        
-//        let category = UNNotificationCategory(identifier: "cat", actions: [happy,sad], intentIdentifiers: [], options: [])
-//        
-//        UNUserNotificationCenter.current().setNotificationCategories([category])
-//        
-//        let content = UNMutableNotificationContent()
-//        content.title = "Hi buddy"
-//        content.subtitle = "I hope, you are well"
-//        content.body = "How do you feel today?"
-//        content.categoryIdentifier = "cat"
-//        //content.badge = 1
-//        
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-//        let request = UNNotificationRequest(identifier: "timerdome", content: content, trigger: trigger)
-//        
-//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        
-        
-        
-        
-        
-        
-        
-        getMood = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(displayAlert), userInfo: nil, repeats: true)
-        
-        
-        
-        
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        
+        moodTimer = Timer.scheduledTimer(timeInterval: 28800, target: self, selector: #selector(displayAlert), userInfo: nil, repeats: true)
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signIn()
         
@@ -74,37 +40,28 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate, GIDSig
     
     func displayAlert()
     {
-        ViewController.counter = ViewController.counter + 1
         
-        if ViewController.counter >= 5
+        ViewController.resetCounter = ViewController.resetCounter + 1
+        print(ViewController.resetCounter)
+        
+        if ViewController.resetCounter == 9    // To indicate that the entries have been fetched for 3 days
         {
-            getMood.invalidate()
-            getMood = nil
+            moodTimer.invalidate()
+            moodTimer = nil
+            ViewController.resetCounter = 0
+            
             
             if ViewController.sadCounter > ViewController.happyCounter
             {
                 ViewController.sadCounter = 0
                 ViewController.happyCounter = 0
-                print ("you are sad")
+                print ("You are sad")
                 
-                let alert = UIAlertController(title: "HI", message: "you are sad for a while", preferredStyle: UIAlertControllerStyle.alert)
-                
-                
-                alert.addAction(UIAlertAction(title: "EVENTS", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in
-                    
-                    //self.tabBarController?.selectedIndex = 1
-//                    UIApplication.shared.open(NSURL(string:"https://www.cineworld.ie")! as URL, options: [:], completionHandler: nil)
-                    
-                    
-                    let storyBoard : UIStoryboard = UIStoryboard(name: "tabbar", bundle:nil)
-                    
-                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "event_tvc") as! EventsTVC
-                    self.present(nextViewController, animated:true, completion:nil)
-                }))
-                
+                let alert = UIAlertController(title: "Oops..!", message: "you seem sad for a while. Please select an action to take a break and refresh yourself.", preferredStyle: UIAlertControllerStyle.alert)
+             
                 alert.addAction(UIAlertAction(title: "BOOK A MOVIE", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in UIApplication.shared.open(NSURL(string:"https://www.cineworld.ie")! as URL, options: [:], completionHandler: nil) }))
                 
-                alert.addAction(UIAlertAction(title: "PUBLIC EVENTS", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in UIApplication.shared.open(NSURL(string:"https://www.cineworld.ie")! as URL, options: [:], completionHandler: nil) }))
+                alert.addAction(UIAlertAction(title: "PUBLIC EVENTS", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in UIApplication.shared.open(NSURL(string:"https://www.eventbrite.ie")! as URL, options: [:], completionHandler: nil) }))
                         
                 self.present(alert, animated: true, completion: nil)
                 
@@ -115,26 +72,36 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate, GIDSig
                 ViewController.sadCounter = 0
                 ViewController.happyCounter = 0
                 print("you are happy")
+                
+                let alert2 = UIAlertController(title: "Happy Days", message: "We are glad that you're happy over the days. We hope your happeniess continues long", preferredStyle: UIAlertControllerStyle.alert)
+                
+                alert2.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                
+                self.present(alert2, animated: true, completion: nil)
+                
+                
             }
+            
+            moodTimer = Timer.scheduledTimer(timeInterval: 28800, target: self, selector: #selector(displayAlert), userInfo: nil, repeats: true)
+
         }
         
-        let happy = UNNotificationAction(identifier: "happy", title: "happy", options: .foreground)
+        let happy = UNNotificationAction(identifier: "happy", title: "Happy", options: .foreground)
         
-        let sad = UNNotificationAction(identifier: "sad", title: "sad", options: .foreground)
+        let sad = UNNotificationAction(identifier: "sad", title: "Sad", options: .foreground)
         
-        let category = UNNotificationCategory(identifier: "cat", actions: [happy,sad], intentIdentifiers: [], options: [])
+        let category = UNNotificationCategory(identifier: "category", actions: [happy,sad], intentIdentifiers: [], options: [])
         
         UNUserNotificationCenter.current().setNotificationCategories([category])
         
         let content = UNMutableNotificationContent()
         content.title = "Hi buddy"
-        content.subtitle = "I hope, you are well"
-        content.body = "How do you feel today?"
-        content.categoryIdentifier = "cat"
-        //content.badge = 1
+        content.subtitle = "How's your day today"
+        content.body = "please let us know your mood to help you"
+        content.categoryIdentifier = "category"
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "timerdome", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "timerdown", content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         

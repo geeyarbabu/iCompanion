@@ -12,134 +12,67 @@ import UserNotifications
 
 class EventsTVC: UITableViewController, UNUserNotificationCenterDelegate, MFMailComposeViewControllerDelegate {
 
-    var getMood: Timer!
-    var event : [Event] = []
-    
+    var moodTimer: Timer!
+   
+    var model = ModelClass()
   
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    
-
-//        getMood = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(displayAlert), userInfo: nil, repeats: true)
-//    
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     
-    
-//    func displayAlert()
-//    {
-//        
-//        let alert = UIAlertController(title: "HI", message: "How is your mood today", preferredStyle: UIAlertControllerStyle.alert)
-//        
-//        
-//        alert.addAction(UIAlertAction(title: "HAPPY", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in EventsTVC.happyCounter += 1 }))
-//        
-//        alert.addAction(UIAlertAction(title: "SAD", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in EventsTVC.sadCounter += 1 }))
-//        
-//        self.present(alert, animated: true, completion: nil)
-//        
-//        if EventsTVC.sadCounter >= 2
-//        {
-//            
-//            alertTwo()
-//            
-//        }
-    
+    @IBAction func eventTVCRefresh(_ sender: UIRefreshControl) {
         
-//        let sadAlert = UIAlertController(title: "HI Buddy", message: "you are worried for the past few minutes", preferredStyle: UIAlertControllerStyle.alert)
-//        //let cancel = UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil)
-//        
-//        sadAlert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
-//        
-//        self.present(sadAlert, animated: true, completion: nil)
-//        
-        
-        
+        refreshControl?.beginRefreshing()
+        model.eventFetch()
+        self.tableView.reloadData()
+        refreshControl?.endRefreshing()
+    }
     
-    
-    
-//    func alertTwo()
-//    {
-//        getMood.invalidate()
-//        getMood = nil
-//        
-//        let sadAlert = UIAlertController(title: "HI Buddy", message: "you are worried for the past few minutes", preferredStyle: UIAlertControllerStyle.alert)
-//        //let cancel = UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil)
-//        
-//        sadAlert.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
-//        
-//        self.present(sadAlert, animated: true, completion: nil)
-//        
-//        print("bgjhgb")
-//    }
-
     
     override func viewWillAppear(_ animated: Bool) {
-        getData()
         
+        model.eventFetch()
+
         tableView.reloadData()
     }
     
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return event.count
+        return model.event.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "event_cell", for: indexPath) as! Event_Cell
  
-      //  let cell = UITableViewCell()
+     
         
-      //  let event_fetched = event[indexPath.row]
+       
+        cell.event_data = model.event[indexPath.row]
         
-        cell.event_data = event[indexPath.row]
-        
-        // Configure the cell...
-
         return cell
+        
     }
     
-
-    func getData()
-    {
-        let container = UIApplication.shared.delegate as! AppDelegate
-        
-        let context = container.persistentContainer.viewContext
-        
-        do {
-            
-            event = try context.fetch(Event.fetchRequest())
-        }
-        catch{
-            print("error")
-        }
-    }
     
- 
-    
+    // as we have to present the mail view in the parent view, we have left the method in the controller
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
         let shareAction = UITableViewRowAction(style: .normal, title:"Mail the Organiser") { (action: UITableViewRowAction!, indexPath: IndexPath!) -> Void in
             
             
@@ -149,13 +82,13 @@ class EventsTVC: UITableViewController, UNUserNotificationCenterDelegate, MFMail
             mailCompose.mailComposeDelegate = self
             
             
-            mailCompose.setToRecipients([self.event[indexPath.row].email!])
+            mailCompose.setToRecipients([self.model.event[indexPath.row].email!])
             
-            // +  "\(String(describing: event_data.title))"
+            
             mailCompose.setSubject("Reg: Inquiry regarding")
             
             
-            mailCompose.setMessageBody("Hi,"+"\n"+"I would like to inquire about event "+"\(String(describing: self.event[indexPath.row].title!))"+". Could you please provide me more information about it?", isHTML: false)
+            mailCompose.setMessageBody("Hi,"+"\n"+"I would like to inquire about event "+"\(String(describing: self.model.event[indexPath.row].title!))"+". Could you please provide me more information about it?", isHTML: false)
             
             if MFMailComposeViewController.canSendMail(){
                 
@@ -165,11 +98,6 @@ class EventsTVC: UITableViewController, UNUserNotificationCenterDelegate, MFMail
             else{
                 print("Error...!")
             }
-
-            
-            
-            
-            
         }
         
         return [shareAction]

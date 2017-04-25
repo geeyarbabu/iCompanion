@@ -13,23 +13,13 @@ class FavouritesTVC: UITableViewController {
     
     @IBOutlet var favTable: UITableView!
     
-    var favo : [Favourites] = []
+    let model = ModelClass()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
-        let container = UIApplication.shared.delegate as! AppDelegate
-        
-        let context = container.persistentContainer.viewContext
-        
-        do {
-            
-            favo = try context.fetch(Favourites.fetchRequest())
-        }
-        catch{
-            print("error")
-        }
-        
+       model.fetchFavourites()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,65 +42,55 @@ class FavouritesTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return favo.count
+        return model.favo.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! FavCell
 
         // Configure the cell...
         
-        if favo.count > 0 {
-        cell.textLabel?.text = favo[indexPath.row].event_title!
-        }
+       
+        cell.favData = model.favo[indexPath.row]
+        
         return cell
     }
 
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    
+    @IBAction func refreshingFavouriteTVC(_ sender: UIRefreshControl) {
+        refreshControl?.beginRefreshing()
+        model.fetchFavourites()
+        self.favTable.reloadData()
+        refreshControl?.endRefreshing()
+        
     }
-    */
+    
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+}
+
+
+class FavCell:  UITableViewCell{
+    
+    @IBOutlet weak var favTitle: UILabel!
+    @IBOutlet weak var favDetails: UILabel!
+    @IBOutlet weak var favDate: UILabel!
+    
+    
+    var favData = Favourites(){
+        didSet{
+            populateCell()
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    func populateCell()
+    {
+        favTitle.text = favData.event_title!
+        favDate.text = favData.event_date!
+        favDetails.text = favData.event_description!
+        
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
