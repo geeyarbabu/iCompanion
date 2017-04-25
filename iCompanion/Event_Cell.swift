@@ -12,6 +12,7 @@ import MapKit
 import CoreLocation
 import Firebase
 
+
 class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var event_title: UILabel!
@@ -26,6 +27,7 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var getDirectionButton: UIButton!
     
     var model = ModelClass()
+    
     
     @IBOutlet weak var event_description: UILabel!
     var event_data = Event() {
@@ -203,6 +205,7 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         sender.isUserInteractionEnabled = false
     }
     
+
     
     @IBAction func interested_pressed(_ sender: UIButton) {
     
@@ -211,9 +214,16 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         interestImage.image = #imageLiteral(resourceName: "InterestedYes")
         interestButton.isUserInteractionEnabled = false
         
+        let title = "INTERESTED:" + event_data.title!
         
-
+        model.addToCalender(eventDate: event_data.date_of_event!, eventTitle: title  )
+        
     }
+    
+    
+    
+    
+    
     
     
     @IBAction func going_pressed(_ sender: UIButton) {
@@ -222,6 +232,13 @@ class Event_Cell: UITableViewCell, MFMailComposeViewControllerDelegate {
         
         goingImage.image = #imageLiteral(resourceName: "goingYes")
         goingButton.isUserInteractionEnabled = false
+        
+        let title = "GOING:" + event_data.title!
+        
+        model.addToCalender(eventDate: event_data.date_of_event!, eventTitle: title  )
     }
+    
+    
+    
     
 }

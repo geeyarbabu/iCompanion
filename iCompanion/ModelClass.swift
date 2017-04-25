@@ -11,6 +11,7 @@ import MessageUI
 import MapKit
 import CoreLocation
 import Firebase
+import EventKit
 
 
 class ModelClass : NSObject {
@@ -40,7 +41,7 @@ class ModelClass : NSObject {
     static var resetCounter = 0
     var moodFlag = String()
     
-
+    var savedEventId = String()
     
     
     func eventFetch()
@@ -194,6 +195,59 @@ class ModelClass : NSObject {
         container.saveContext()
 
     }
+    
+    
+    func addToCalender(eventDate: String, eventTitle: String) {
+        
+        //Adds event in calender
+        let eventStore = EKEventStore()
+        
+        let formatter2 = DateFormatter()
+        formatter2.dateFormat = "dd-MM-yyyy"
+        let date2 = formatter2.date(from: eventDate)
+        
+        
+        
+        let startDate = date2
+        let endDate = startDate?.addingTimeInterval(86400) // One hour
+        
+        if (EKEventStore.authorizationStatus(for: .event) != EKAuthorizationStatus.authorized) {
+            eventStore.requestAccess(to: .event, completion: {
+                granted, error in
+                self.createEvent(eventStore, title: eventTitle, startDate: startDate!, endDate: endDate!)
+            })
+        } else {
+            createEvent(eventStore, title: eventTitle, startDate: startDate!, endDate: endDate!)
+        }
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Creates an event in the EKEventStore. The method assumes the eventStore is created and
+    // accessible
+    func createEvent(_ eventStore: EKEventStore, title: String, startDate: Date, endDate: Date) {
+        let event = EKEvent(eventStore: eventStore)
+        
+        event.title = title
+        event.startDate = startDate
+        event.endDate = endDate
+        event.calendar = eventStore.defaultCalendarForNewEvents
+        do {
+            try eventStore.save(event, span: .thisEvent)
+            savedEventId = event.eventIdentifier
+        } catch {
+            print("Error...")
+        }
+    }
+
+    
 }
 
 
