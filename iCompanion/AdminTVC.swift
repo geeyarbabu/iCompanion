@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 
 
+//Class that gets the input to add an event into the system.
+
 class AdminTVC: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
@@ -24,10 +26,8 @@ class AdminTVC: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
     @IBOutlet weak var phone_number: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var department: UITextField!
-  
-//    var dept = ["Computer Science" , "Engineering" , "Science", "Electronics"]
-//    let picker = UIPickerView()
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         model.picker.delegate = self
@@ -35,6 +35,38 @@ class AdminTVC: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         department.inputView = model.picker
     }
     
+    
+    // MARK: - Static Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 9
+    }
+    
+    // MARK: - Adding the data to core data
+    @IBAction func addBtnPressed(_ sender: Any) {
+        
+        model.saveEvent(event_title: event_title.text!, event_description: event_description.text!, house_number: house_number.text!, street_name: street_name.text!, event_city: event_city.text!, date_of_event: date_of_event.text!, phone_number: phone_number.text!, email: email.text!, department: department.text!)
+        
+        // Displaying the alert that data is ssved and clearing off the fields
+        let alert = UIAlertController(title: "Saved", message: "Event Saved. Thanks for your participation", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in self.event_title.text = ""
+            self.event_description.text = ""
+            self.date_of_event.text = ""
+            self.street_name.text = ""
+            self.house_number.text = ""
+            self.event_city.text = ""
+            self.email.text = ""
+            self.phone_number.text = ""
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+        event_title.becomeFirstResponder()
+    }
+    // MARK: - Configuring the picker view    override func
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -53,41 +85,6 @@ class AdminTVC: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSou
         department.text = model.dept[row]
         self.view.endEditing(false)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 9
-    }
     
-    @IBAction func addBtnPressed(_ sender: Any) {
-        
-        model.saveEvent(event_title: event_title.text!, event_description: event_description.text!, house_number: house_number.text!, street_name: street_name.text!, event_city: event_city.text!, date_of_event: date_of_event.text!, phone_number: phone_number.text!, email: email.text!, department: department.text!)
-        
-        
-        let alert = UIAlertController(title: "Saved", message: "Event Saved. Thanks for your participation", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in self.event_title.text = ""
-            self.event_description.text = ""
-            self.date_of_event.text = ""
-            self.street_name.text = ""
-            self.house_number.text = ""
-            self.event_city.text = ""
-            self.email.text = ""
-            self.phone_number.text = ""
-        }))
-                self.present(alert, animated: true, completion: nil)
-        
-            }
-
+    
 }

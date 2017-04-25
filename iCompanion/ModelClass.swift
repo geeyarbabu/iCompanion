@@ -6,6 +6,8 @@
 //  Copyright © 2017 UCD. All rights reserved.
 //
 
+
+
 import Foundation
 import MessageUI
 import MapKit
@@ -13,7 +15,7 @@ import CoreLocation
 import Firebase
 import EventKit
 
-
+// The model class of the applcation
 class ModelClass : NSObject {
     
     var event : [Event] = []
@@ -23,8 +25,7 @@ class ModelClass : NSObject {
 
     var dept = ["Computer Science" , "Engineering" , "Science", "Electronics"]
     let picker = UIPickerView()
-    
-    
+
     let geoCoder = CLGeocoder()
     
     var latitude: CLLocationDegrees? = nil
@@ -34,8 +35,6 @@ class ModelClass : NSObject {
     let latZoom:CLLocationDegrees = 0.01
     let longZoom:CLLocationDegrees = 0.01
     
-
-
     static var happyCounter = 0
     static var sadCounter = 0
     static var resetCounter = 0
@@ -43,7 +42,7 @@ class ModelClass : NSObject {
     
     var savedEventId = String()
     
-    
+    // Method to fetch the events from core data
     func eventFetch()
     {
         let container = UIApplication.shared.delegate as! AppDelegate
@@ -56,6 +55,7 @@ class ModelClass : NSObject {
         }
     }
     
+    // Method to write the event data int coredata
     func saveEvent( event_title: String,event_description: String, house_number: String, street_name: String, event_city: String, date_of_event: String, phone_number: String, email: String ,department: String  )
     {
         let container = UIApplication.shared.delegate as! AppDelegate
@@ -76,7 +76,7 @@ class ModelClass : NSObject {
         container.saveContext()
     }
 
-    
+    // method to fetch the favourites from coredata
     func fetchFavourites()
     {
         let container = UIApplication.shared.delegate as! AppDelegate
@@ -92,6 +92,7 @@ class ModelClass : NSObject {
         }
     }
 
+    // method to fetch the interested events from coredata
     func fetchInterested()
     {
         let container = UIApplication.shared.delegate as! AppDelegate
@@ -107,6 +108,7 @@ class ModelClass : NSObject {
         }
     }
 
+    // method to fetch the going events from coredata
     func fetchGoing()
     {
         let container = UIApplication.shared.delegate as! AppDelegate
@@ -122,11 +124,10 @@ class ModelClass : NSObject {
         }
     }
 
-    
+    // method to open apple maps and direct the user from the current location to the event location
     func getDirection(eventTitle: String)
     {
         
-      
         let regionDistance:CLLocationDistance = 10000
         let coordinates = CLLocationCoordinate2DMake(self.latitude!, self.longitude!)
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
@@ -138,11 +139,10 @@ class ModelClass : NSObject {
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = "\(String(describing: eventTitle))"
         mapItem.openInMaps(launchOptions: options)
-        
     }
     
     
-    
+    // method to write the user's favourites into coredata
     func saveFavourite(eventTitle: String, eventDate: String, eventDescription: String)
     {
     let container = UIApplication.shared.delegate as! AppDelegate
@@ -157,12 +157,12 @@ class ModelClass : NSObject {
     if let userName = user{
         favourite.user_name = userName.email!
     }
-    
-    
+        
     container.saveContext()
     }
     
     
+    // method to write the user's interested events into coredata
     func saveInterested(eventTitle: String, eventDate: String){
         let container = UIApplication.shared.delegate as! AppDelegate
         let context = container.persistentContainer.viewContext
@@ -179,6 +179,7 @@ class ModelClass : NSObject {
         container.saveContext()
     }
     
+    // method to write the user's going events into coredata
     func saveGoing(eventTitle: String, eventDate: String){
         let container = UIApplication.shared.delegate as! AppDelegate
         let context = container.persistentContainer.viewContext
@@ -196,7 +197,7 @@ class ModelClass : NSObject {
 
     }
     
-    
+    // Responds to button to add event. This checks that we have permission first, before adding the event
     func addToCalender(eventDate: String, eventTitle: String) {
         
         //Adds event in calender
@@ -222,16 +223,7 @@ class ModelClass : NSObject {
 
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    // Creates an event in the EKEventStore. The method assumes the eventStore is created and
-    // accessible
+    // Creates an event in the EKEventStore. The method assumes the eventStore is created and accessible
     func createEvent(_ eventStore: EKEventStore, title: String, startDate: Date, endDate: Date) {
         let event = EKEvent(eventStore: eventStore)
         

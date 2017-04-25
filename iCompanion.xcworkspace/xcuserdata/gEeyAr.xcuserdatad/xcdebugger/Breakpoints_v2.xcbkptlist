@@ -25,22 +25,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iCompanion/AdminTVC.swift"
-            timestampString = "514740385.303286"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "AdminTVC"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "iCompanion/ViewController.swift"
             timestampString = "514763566.603379"
             startingColumnNumber = "9223372036854775807"
@@ -58,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iCompanion/ModelClass.swift"
-            timestampString = "514779329.580331"
+            timestampString = "514800662.610889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253">
+            startingLineNumber = "245"
+            endingLineNumber = "245">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -72,12 +56,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iCompanion/Event_Cell.swift"
-            timestampString = "514774212.87774"
+            timestampString = "514794006.401864"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "refreshCell()"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "populateCell()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -88,12 +72,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iCompanion/ModelClass.swift"
-            timestampString = "514778385.487672"
+            timestampString = "514796052.611805"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
-            landmarkName = "addToCalender(eventDate:)"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "addToCalender(eventDate:eventTitle:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
